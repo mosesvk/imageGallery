@@ -8,6 +8,17 @@
 			"problemMatcher": [],
 			"label": "npm: build",
 			"detail": "next build"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "next dev",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}
 		}
 	]
 }
