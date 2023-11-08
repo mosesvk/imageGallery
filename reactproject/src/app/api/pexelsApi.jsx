@@ -1,16 +1,62 @@
-'use client';
+'use client'
+import React, { useEffect, useState } from 'react';
 import { createClient } from 'pexels';
+import Image from 'next/image'
 
-export default  async function FetchPexelsApi() {
-    try {
-    
-const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
-const query = 'Nature';
 
-client.photos.search({ query, per_page: 1 }).then(photos => {...photos});
-    }catch(error){
-        console.error(error)
-    }
-   
-return data;
-}
+// const query = 'Nature';
+
+// client.photos.search({ query, per_page: 1 }).then(photos => {...});
+
+async function FetchPexelsApi() {
+    const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
+    const data = await client.photos.curated({ per_page: 1 });
+    return data;
+  }
+  
+  function ImageApi() {
+     const [collection, setCollection] = useState(null);
+
+     useEffect(() => {
+        FetchPexelsApi().then((data) => {
+            const photos = data.photos;
+            setCollection(photos);
+        });
+     }, []);
+     return (
+        <div>
+            {collection && collection.map((photo) => (
+                <div key={photo.id}>
+                    <Image src={photo.src.original} 
+                    alt={photo.photographer} 
+                    width={photo.width} 
+                    height={photo.height} />
+                    </div>
+            ))}
+            </div>
+     );
+  }
+export default ImageApi;
+// // example phto
+// {
+//     "id": 2014422,
+//     "width": 3024,
+//     "height": 3024,
+//     "url": "https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/",
+//     "photographer": "Joey Farina",
+//     "photographer_url": "https://www.pexels.com/@joey",
+//     "photographer_id": 680589,
+//     "avg_color": "#978E82",
+//     "src": {
+//       "original": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg",
+//       "large2x": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//       "large": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+//       "medium": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350",
+//       "small": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130",
+//       "portrait": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+//       "landscape": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+//       "tiny": "https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
+//     },
+//     "liked": false,
+//     "alt": "Brown Rocks During Golden Hour"
+//   }
