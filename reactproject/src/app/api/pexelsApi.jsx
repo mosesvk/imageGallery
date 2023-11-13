@@ -1,41 +1,75 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { createClient } from 'pexels';
-import Image from 'next/image'
-
-
-// const query = 'Nature';
-
-// client.photos.search({ query, per_page: 1 }).then(photos => {...});
+import Link from 'next/link';
+import Image from 'next/image';
+//4 different randomized searches.
+//create a search bar wich changes the query state
+const themes = [
+    'nature', 'city', 'technology', 'animals', 'food',
+    'architecture', 'travel', 'business', 'fashion', 'fitness',
+    'music', 'art', 'space', 'vintage', 'abstract',
+    'science', 'education', 'movies', 'sports', 'books',
+    'holiday', 'party', 'gaming', 'cars', 'motorcycles',
+    'ocean', 'mountains', 'underwater', 'skydiving', 'desert',
+    'rainforest', 'winter', 'summer', 'fall', 'spring',
+    'minimalistic', 'graffiti', 'urban', 'rural', 'sunset',
+    'sunrise', 'night', 'day', 'beach', 'fireworks',
+    'coffee', 'tea', 'wine', 'cocktails', 'vegetables',
+    'fruits', 'desserts', 'sushi', 'pizza', 'burgers',
+    'ice cream', 'candy', 'flowers', 'birds', 'butterflies',
+    'insects', 'wildlife', 'pets', 'farm animals', 'reptiles',
+    'amphibians', 'underground', 'skyscrapers', 'bridges', 'tunnels',
+    'lakes', 'rivers', 'waterfalls', 'caves', 'fields',
+    'office', 'meeting', 'workplace', 'coding', 'programming',
+    'gym', 'yoga', 'meditation', 'concert', 'festivals',
+    'museum', 'painting', 'sculpture', 'stars', 'galaxy',
+    'robots', 'computers', 'green energy', 'drones', 'virtual reality'
+  ];
+  const randomIndex = Math.floor(Math.random() *themes.length);
+  const randomTheme = themes[randomIndex]
+ const query =randomTheme;
 
 async function FetchPexelsApi() {
-    const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
-    const data = await client.photos.curated({ per_page: 1 });
-    return data;
-  }
-  
-  function ImageApi() {
-     const [collection, setCollection] = useState(null);
+  const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
+  const data = await client.photos.search({ query, per_page: 30 });
+  console.log(data);
+  return data;
+}
 
-     useEffect(() => {
-        FetchPexelsApi().then((data) => {
-            const photos = data.photos;
-            setCollection(photos);
-        });
-     }, []);
-     return (
-        <div>
-            {collection && collection.map((photo) => (
-                <div key={photo.id}>
-                    <Image src={photo.src.original} 
-                    alt={photo.photographer} 
-                    width={photo.width} 
-                    height={photo.height} />
-                    </div>
-            ))}
+function ImageApi() {
+  const [collection, setCollection] = useState([]);
+
+  useEffect(() => {
+    FetchPexelsApi().then((data) => {
+      const photos = data.photos;
+      setCollection(photos);
+      console.log(photos);
+    });
+  }, []);
+
+  return (
+    <div className='flex flex-wrap justify-evenly'>
+      {collection && (
+        <>
+          {collection.map((photo) => (
+            <div key={photo.id}>
+              <Link href="/photos/[id]" as={`/photos/${photo.id}`}>
+                  <Image
+                    src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280`}
+                    alt={photo.photographer}
+                    width={200}  // Set your desired width here
+                    height={200} // Set your desired height here
+                  />
+              </Link>
             </div>
-     );
-  }
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
+
 export default ImageApi;
 // // example phto
 // {
