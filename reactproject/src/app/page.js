@@ -1,12 +1,14 @@
 // import Image from 'next/image'
 import './styles/globals.css'
-import ImageApi from './api/pexelsApi.jsx'
+// import ImageApiSet from './api/pexelsApiSetPages.jsx'
+import ImageApiCurrated from './api/pexelsApiCurrated.jsx'
 export default function Home() {
   return (
     <div className='bg-black'>
     <h1 className='text-white'>Hello</h1>
     <div>
-      <ImageApi />
+      {/* <ImageApiSet /> */}
+      <ImageApiCurrated />
     </div>
     </div>
   )

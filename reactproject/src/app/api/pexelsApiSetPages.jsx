@@ -6,25 +6,7 @@ import Image from 'next/image';
 //4 different randomized searches.
 //create a search bar wich changes the query state
 const themes = [
-    'nature', 'city', 'technology', 'animals', 'food',
-    'architecture', 'travel', 'business', 'fashion', 'fitness',
-    'music', 'art', 'space', 'vintage', 'abstract',
-    'science', 'education', 'movies', 'sports', 'books',
-    'holiday', 'party', 'gaming', 'cars', 'motorcycles',
-    'ocean', 'mountains', 'underwater', 'skydiving', 'desert',
-    'rainforest', 'winter', 'summer', 'fall', 'spring',
-    'minimalistic', 'graffiti', 'urban', 'rural', 'sunset',
-    'sunrise', 'night', 'day', 'beach', 'fireworks',
-    'coffee', 'tea', 'wine', 'cocktails', 'vegetables',
-    'fruits', 'desserts', 'sushi', 'pizza', 'burgers',
-    'ice cream', 'candy', 'flowers', 'birds', 'butterflies',
-    'insects', 'wildlife', 'pets', 'farm animals', 'reptiles',
-    'amphibians', 'underground', 'skyscrapers', 'bridges', 'tunnels',
-    'lakes', 'rivers', 'waterfalls', 'caves', 'fields',
-    'office', 'meeting', 'workplace', 'coding', 'programming',
-    'gym', 'yoga', 'meditation', 'concert', 'festivals',
-    'museum', 'painting', 'sculpture', 'stars', 'galaxy',
-    'robots', 'computers', 'green energy', 'drones', 'virtual reality'
+    'nature', 'city', 'animals', 'food'
   ];
   const randomIndex = Math.floor(Math.random() *themes.length);
   const randomTheme = themes[randomIndex]
@@ -37,7 +19,7 @@ async function FetchPexelsApi() {
   return data;
 }
 
-function ImageApi() {
+function ImageApiSet() {
   const [collection, setCollection] = useState([]);
 
   useEffect(() => {
@@ -47,6 +29,8 @@ function ImageApi() {
       console.log(photos);
     });
   }, []);
+
+  
 
   return (
     <div className='flex flex-wrap justify-evenly'>
@@ -70,7 +54,7 @@ function ImageApi() {
   );
 }
 
-export default ImageApi;
+export default ImageApiSet;
 // // example phto
 // {
 //     "id": 2014422,
