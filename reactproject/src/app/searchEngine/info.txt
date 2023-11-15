@@ -1,2 +1,0 @@
-this is how the app router works. you need to have a pages.js file in any route that you want to be 
-public. then to get to this route localy you need to type in /searchEngine.
