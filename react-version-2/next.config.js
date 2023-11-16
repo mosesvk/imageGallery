@@ -5,3 +5,5 @@ const nextConfig = {
     domains: ['images.pexels.com']
   }
 }
+
+module.exports = nextConfig;

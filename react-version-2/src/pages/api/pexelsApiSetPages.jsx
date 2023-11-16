@@ -5,12 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 //4 different randomized searches.
 //create a search bar wich changes the query state
-const themes = [
-    'nature', 'city', 'animals', 'food'
-  ];
-  const randomIndex = Math.floor(Math.random() *themes.length);
-  const randomTheme = themes[randomIndex]
- const query =randomTheme;
+
+  let query = 'Loading...'
 
 async function FetchPexelsApi() {
   const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
@@ -19,9 +15,9 @@ async function FetchPexelsApi() {
   return data;
 }
 
-function ImageApiSet() {
+function ImageApiSet({ theme }) {
   const [collection, setCollection] = useState([]);
-
+ query = theme;
   useEffect(() => {
     FetchPexelsApi().then((data) => {
       const photos = data.photos;

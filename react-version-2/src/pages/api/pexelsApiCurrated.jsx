@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { createClient } from 'pexels';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Image from 'next/image';
 //4 different randomized searches.
 //create a search bar wich changes the query state
@@ -34,14 +34,14 @@ function ImageApiCurrated() {
         <>
           {collection.map((photo) => (
             <div key={photo.id}>
-              <Link href="/photos/[id]" as={`/photos/${photo.id}`}>
+              {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
                   <Image
                     src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280`}
                     alt={photo.photographer}
                     width={200}  // Set your desired width here
                     height={200} // Set your desired height here
                   />
-              </Link>
+              {/* </Link> */}
             </div>
           ))}
         </>
