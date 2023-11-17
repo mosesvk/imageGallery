@@ -7,6 +7,8 @@ import Image from 'next/image';
 //create a search bar wich changes the query state
 
   let query = 'Loading...'
+  
+
 
 async function FetchPexelsApi() {
   const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
@@ -17,6 +19,7 @@ async function FetchPexelsApi() {
 
 function ImageApiSet({ theme }) {
   const [collection, setCollection] = useState([]);
+  
  query = theme;
   useEffect(() => {
     FetchPexelsApi().then((data) => {
