@@ -4,7 +4,7 @@ const Country = () => {
   return (
     <div>
       <Navbar />
-      <h1>Country</h1>
+      <h1 className="text-center">Country</h1>
       <ImageApiSet theme= { 'country' }/>
     </div>
   );

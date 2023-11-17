@@ -1,10 +1,12 @@
 import Navbar from "../../components/Navbar";
+import ImageApiSet from "../api/pexelsApiSetPages";
 
 const Food = () => {
   return (
     <div>
       <Navbar />
-      <h1>Food</h1>
+      <h1 className="text-center">Food</h1>
+      <ImageApiSet theme= { 'food' }/>
     </div>
   );
 };

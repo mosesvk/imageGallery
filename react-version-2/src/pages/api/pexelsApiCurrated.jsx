@@ -19,7 +19,7 @@ function ImageApiCurrated() {
   useEffect(() => {
     FetchPexelsApi().then((data) => {
       const photos = data.photos;
-      const selectedImages = getRandomImages(photos, 20);
+      const selectedImages = getRandomImages(photos, 40);
       setCollection(selectedImages)
     });
   }, []);
@@ -29,17 +29,19 @@ function ImageApiCurrated() {
     return shuffled.slice(0, n);
   };
   return (
-    <div className='flex flex-wrap justify-evenly'>
+    <div className='grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4'>
       {collection && (
         <>
           {collection.map((photo) => (
-            <div key={photo.id}>
+            <div key={photo.id} style={{ gridColumn: 'span 1', gridRow: `span ${Math.ceil(photo.height / photo.width)}` }}>
               {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
                   <Image
-                    src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280`}
+                    src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
                     alt={photo.photographer}
-                    width={200}  // Set your desired width here
-                    height={200} // Set your desired height here
+                    width={200}
+                    height={photo.height * (200 / photo.width)} // Maintain aspect ratio
+                    layout="responsive"
+                    className="max-w-full h-auto"
                   />
               {/* </Link> */}
             </div>
