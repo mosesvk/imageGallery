@@ -8,6 +8,8 @@ import { getFabUtilityClass } from '@mui/material';
 //create a search bar wich changes the query state
 
   let query = 'Loading...'
+  
+
 
 async function FetchPexelsApi() {
   const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
