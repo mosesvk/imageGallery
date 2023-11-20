@@ -4,7 +4,7 @@ import Tags from '@/components/searchBar'
 export default function Home() {
   return (
     <main>
-     <Navbar />
+      <Navbar />
       <ImageApiCurrated /> 
 {/* <Tags></Tags> */}
     </main>

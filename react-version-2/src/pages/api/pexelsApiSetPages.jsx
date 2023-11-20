@@ -4,13 +4,12 @@ import { createClient } from 'pexels';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getFabUtilityClass } from '@mui/material';
+
 //4 different randomized searches.
 //create a search bar wich changes the query state
 
-  let query = 'Loading...'
+let query = 'Loading...'
   
-
-
 async function FetchPexelsApi() {
   const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
   const data = await client.photos.search({ query, per_page: 40 });
@@ -70,18 +69,21 @@ function ImageApiSet({ theme }) {
   }, []);
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+    <div className='columns-6'>
       {collection && (
         <>
           {collection.map((photo) => (
-            <div key={photo.id} style={{ gridColumn: 'span 1', gridRow: `span ${Math.ceil(photo.height / photo.width)}` }}>
-              <Link href="/photos/[id]" as={`/photos/${photo.id}`}>
+            <div key={photo.id} className='mb-4'>
+              {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
+              {/* <Link href={`/photos/${photo.id}`} passHref> */}
+              <Link href="/photos/[id]" as={`/photos/${photo.id}`} passHref>
                   <Image
                     src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
                     alt={photo.photographer}
                     width={200}
-                    height={photo.height * (200 / photo.width)} // Maintain aspect ratio
-                    layout="responsive"
+                    height={200}
+                    // height={photo.height * (200 / photo.width)} // Maintain aspect ratio
+                    // layout="responsive"
                     className="max-w-full h-auto"
                   />
               </Link>
