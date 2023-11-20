@@ -34,20 +34,23 @@ function ImageApiSet({ theme }) {
   }, [searchInputLength]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div className='columns-6'>
       {collection && (
         <>
           {collection.map((photo) => (
-            <div key={photo.id} style={{ gridColumn: 'span 1', gridRow: `span ${Math.ceil(photo.height / photo.width)}` }}>
-              <Link href="/photos/[id]" as={`/photos/${photo.id}`}>
-                <Image
-                  src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
-                  alt={photo.photographer}
-                  width={200}
-                  height={photo.height * (200 / photo.width)}
-                  layout="responsive"
-                  className="max-w-full h-auto"
-                />
+            <div key={photo.id} className='mb-4'>
+              {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
+              {/* <Link href={`/photos/${photo.id}`} passHref> */}
+              <Link href="/photos/[id]" as={`/photos/${photo.id}`} passHref>
+                  <Image
+                    src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
+                    alt={photo.photographer}
+                    width={200}
+                    height={200}
+                    // height={photo.height * (200 / photo.width)} // Maintain aspect ratio
+                    // layout="responsive"
+                    className="max-w-full h-auto"
+                  />
               </Link>
             </div>
           ))}

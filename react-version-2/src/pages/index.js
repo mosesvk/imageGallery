@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBarLayout.js'
 export default function Home() {
   return (
     <main>
-     <Navbar />
+      <Navbar />
       <ImageApiCurrated /> 
 <SearchBar></SearchBar>
     </main>

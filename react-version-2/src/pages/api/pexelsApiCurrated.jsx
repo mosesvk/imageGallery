@@ -29,11 +29,11 @@ function ImageApiCurrated() {
     return shuffled.slice(0, n);
   };
   return (
-    <div className='grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+    <div className='columns-6'>
       {collection && (
         <>
           {collection.map((photo) => (
-            <div key={photo.id} style={{ gridColumn: 'span 1', gridRow: `span ${Math.ceil(photo.height / photo.width)}` }}>
+            <div key={photo.id} className='mb-4'>
               {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
               <Image
   src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}

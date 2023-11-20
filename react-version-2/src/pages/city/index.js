@@ -1,4 +1,4 @@
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar.jsx";
 import ImageApiSet from "../api/pexelsApiSetPages";
 
 const City = () => {
