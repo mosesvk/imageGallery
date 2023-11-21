@@ -74,9 +74,7 @@ function ImageApiSet({ theme }) {
         <>
           {collection.map((photo) => (
             <div key={photo.id} className='mb-4'>
-              {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
-              {/* <Link href={`/photos/${photo.id}`} passHref> */}
-              <Link href="/photos/[id]" as={`/photos/${photo.id}`} passHref>
+              <Link href={`/photos/${photo.id}`} passHref>
                   <Image
                     src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
                     alt={photo.photographer}
