@@ -1,13 +1,15 @@
+import { useSearchQueryContext } from "@/components/searchInputStateContext.js";
 import Navbar from "../../components/navbar.jsx";
-import ImageApiSet from "../api/pexelsApiSetPages";
+import PexelsApi from "../api/PexlesApi.jsx";
 
 const Food = () => {
-  const myTheme = 'food';
+  const { searchInput, setSearchInput } = useSearchQueryContext();
+  setSearchInput('food');
   return (
     <div>
       <Navbar />
-      {/* <h1 className="text-center">Food</h1> */}
-      <ImageApiSet theme= { [myTheme,'green'] }/>
+      <h1 className="text-center">Food</h1>
+      <PexelsApi theme= { searchInput }/>
     </div>
   );
 };

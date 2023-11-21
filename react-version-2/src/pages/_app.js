@@ -1,8 +1,10 @@
 import '@/styles/globals.css'
 //import Layout from '../components/layout';
-
+import { SearchQueryContextProvider } from '@/components/searchInputStateContext';
 export default function App({ Component, pageProps }) {
   return (
-      <Component {...pageProps} />
+    <SearchQueryContextProvider>
+       <Component {...pageProps} />
+       </SearchQueryContextProvider>
   );
 }
