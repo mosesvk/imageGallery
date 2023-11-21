@@ -1,23 +1,14 @@
-'use client';
-import React, {  useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import SearchQueryState from './searchQuery';
 
-// const SearchBar = () => {
-//     const [theme, setTheme] = useState(null)
-//     useEffect(()=> {
-    
-//         setTheme(queryList);
-//     },{theme})
-//     } 
-// export default SearchBar; 
+const SearchBar = () => {
+  const { searchInput, setSearchInput } = SearchQueryState();
 
-
-export default function Tags () {
-    
-const generalThemes = [
+  const generalThemes = [
     'Nature',
     'Technology',
     'Abstract',
@@ -66,14 +57,19 @@ const generalThemes = [
     'Autumn',
     'Spring',
   ];
+  const handleSearchInputChange = (event, newValue) => {
+    setSearchInput([...searchInput, newValue]);
+  };
+console.log(searchInput)
   return (
     <Stack spacing={3} sx={{ width: 500 }}>
       <Autocomplete
         multiple
         id="tags-filled"
-        options={generalThemes.map((option) => option)}
-        defaultValue={[generalThemes[13].title]}
+        options={generalThemes}
+        value={searchInput}
         freeSolo
+        onChange={handleSearchInputChange}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => (
             <Chip variant="outlined" label={option} {...getTagProps({ index })} />
@@ -90,4 +86,6 @@ const generalThemes = [
       />
     </Stack>
   );
-}
+};
+
+export default SearchBar;

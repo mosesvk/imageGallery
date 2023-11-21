@@ -1,12 +1,12 @@
 import Navbar from '@/components/navbar'
 import ImageApiCurrated from './api/pexelsApiCurrated'
-import Tags from '@/components/searchBar'
+import SearchBar from '@/components/SearchBarLayout.js'
 export default function Home() {
   return (
     <main>
       <Navbar />
       <ImageApiCurrated /> 
-{/* <Tags></Tags> */}
+<SearchBar></SearchBar>
     </main>
   )
 }

@@ -7,7 +7,7 @@ const Food = () => {
     <div>
       <Navbar />
       {/* <h1 className="text-center">Food</h1> */}
-      <ImageApiSet theme= { myTheme }/>
+      <ImageApiSet theme= { [myTheme,'green'] }/>
     </div>
   );
 };

@@ -1,72 +1,37 @@
-'use client';
 import React, { useEffect, useState } from 'react';
 import { createClient } from 'pexels';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getFabUtilityClass } from '@mui/material';
-
-//4 different randomized searches.
-//create a search bar wich changes the query state
-
-let query = 'Loading...'
-  
+import SearchQueryState from '@/components/searchQuery';
+let query = ''
 async function FetchPexelsApi() {
-  const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
-  const data = await client.photos.search({ query, per_page: 40 });
-  console.log(data);
-  return data;
+  try {
+    const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
+    const data = await client.photos.search({ query, per_page: 40 });
+    return data;
+  }catch(error){
+    console.error('Error: ' + error)
+  }
+
 }
 
-// function ImageApiSet({ theme }) {
-//   const [collection, setCollection] = useState([]);
-//  query = theme;
-//   useEffect(() => {
-//     FetchPexelsApi().then((data) => {
-//       const photos = data.photos;
-//       setCollection(photos);
-//       console.log(photos);
-//     });
-//   }, []);
-
-  
-
-//   return (
-//     <div className='flex flex-wrap justify-evenly'>
-//         {collection && (
-//           <>
-//             {collection.map((photo) => (
-//               <div key={photo.id}>
-//                 <Link href="/photos/[id]" as={`/photos/${photo.id}`}>
-//                     <Image
-//                       src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280`}
-//                       alt={photo.photographer}
-//                       width={200}  // Set your desired width here
-//                       height={200} // Set your desired height here
-//                     />
-//                 </Link>
-//               </div>
-//             ))}
-//           </>
-//         )}
-//     </div>
-//   );
-// }
-
-// export default ImageApiSet;
-
-
-// ... (import statements)
-
 function ImageApiSet({ theme }) {
+  const { searchInput, searchInputLength } = SearchQueryState();
   const [collection, setCollection] = useState([]);
-  query = theme;
-
+   useEffect(() => {
+    query = theme;
+        FetchPexelsApi().then((data) => {
+          const photos = data?.photos || [];
+          setCollection(photos);
+        });
+      }, []);
   useEffect(() => {
+    query = searchInput;
     FetchPexelsApi().then((data) => {
       const photos = data.photos;
       setCollection(photos);
     });
-  }, []);
+  }, [searchInputLength]);
 
   return (
     <div className='columns-6'>
@@ -96,7 +61,6 @@ function ImageApiSet({ theme }) {
 export default ImageApiSet;
 
 
-
 // // example phto
 // {
 //     "id": 2014422,
@@ -120,3 +84,4 @@ export default ImageApiSet;
 //     "liked": false,
 //     "alt": "Brown Rocks During Golden Hour"
 //   }
+// 

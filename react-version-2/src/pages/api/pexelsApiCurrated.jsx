@@ -34,16 +34,16 @@ function ImageApiCurrated() {
         <>
           {collection.map((photo) => (
             <div key={photo.id} className='mb-4'>
-              <Link href="/photos/[id]" as={`/photos/${photo.id}`} passHref>
-                  <Image
-                    src={`${photo.src.tiny}?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=280&w=200`}
-                    alt={photo.photographer}
-                    width={200}
-                    height={photo.height * (200 / photo.width)} // Maintain aspect ratio
-                    layout="responsive"
-                    className="max-w-full h-auto"
-                  />
-              </Link>
+              {/* <Link href="/photos/[id]" as={`/photos/${photo.id}`}> */}
+              <Image
+  src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}
+  alt={photo.photographer}
+  width={photo.width}
+  height={photo.height}
+  layout="responsive"
+  className="max-w-full h-auto"
+/>
+              {/* </Link> */}
             </div>
           ))}
         </>
