@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField'; 
 import Stack from '@mui/material/Stack';
-import SearchQueryState from './searchQuery';
+import Button from '@mui/material/Button';
+import { useSearchQueryContext }  from './searchInputStateContext';
+// import handleSendSearch from './searchImagesReRender';
+// import SendIcon from '@mui/icons-material/Send';
 
 const SearchBar = () => {
-  const { searchInput, setSearchInput } = SearchQueryState();
-
+  const { searchInput, setSearchInput }  = useSearchQueryContext();
+  const [ localSearchState, setLocalSearchState ] = useState([])
   const generalThemes = [
     'Nature',
     'Technology',
@@ -58,16 +61,21 @@ const SearchBar = () => {
     'Spring',
   ];
   const handleSearchInputChange = (event, newValue) => {
-    setSearchInput([...searchInput, newValue]);
+    setLocalSearchState( newValue);
   };
-console.log(searchInput)
+const handleSendSearch = () => {
+setSearchInput( [...localSearchState])
+setTimeout(()=>{console.log(localSearchState, searchInput)}, 1000)
+} 
   return (
+    <>
     <Stack spacing={3} sx={{ width: 500 }}>
+    <Button variant="contained" onClick={handleSendSearch}> Send</Button>
       <Autocomplete
         multiple
         id="tags-filled"
         options={generalThemes}
-        value={searchInput}
+        value={localSearchState}
         freeSolo
         onChange={handleSearchInputChange}
         renderTags={(value, getTagProps) =>
@@ -85,6 +93,7 @@ console.log(searchInput)
         )}
       />
     </Stack>
+    </>
   );
 };
 
