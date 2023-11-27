@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-         <PexelsApi theme= { searchInput }/>
-        <SearchBar />
+      <PexelsApi theme= { searchInput }/>
+      <SearchBar />
     </main>
   );
 }

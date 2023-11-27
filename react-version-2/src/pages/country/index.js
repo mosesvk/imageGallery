@@ -8,7 +8,7 @@ const Country = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-center">Country</h1>
+      {/* <h1 className="text-center">Country</h1> */}
       <PexelsApi theme= { searchInput }/>
     </div>
   );

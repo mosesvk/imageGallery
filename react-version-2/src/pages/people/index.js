@@ -7,7 +7,7 @@ const People = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-center">People</h1>
+      {/* <h1 className="text-center">People</h1> */}
       <PexelsApi theme= { searchInput }/>
     </div>
   );

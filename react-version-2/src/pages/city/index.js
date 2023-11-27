@@ -8,7 +8,7 @@ const City = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-center">City</h1>
+      {/* <h1 className="text-center">City</h1> */}
       <PexelsApi theme= { searchInput }/>
     </div>
   );

@@ -8,7 +8,7 @@ const Food = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-center">Food</h1>
+      {/* <h1 className="text-center">Food</h1> */}
       <PexelsApi theme= { searchInput }/>
     </div>
   );
