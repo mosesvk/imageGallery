@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { createClient } from 'pexels';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchQueryContext } from '@/components/searchInputStateContext';
+import { SearchQueryContext} from '@/components/searchInputStateContext';
 
 
 
@@ -11,26 +11,24 @@ import { useSearchQueryContext } from '@/components/searchInputStateContext';
 
 // ... (imports and context)
 
-const PexelsApi = function ({ theme }) {
-  const { searchInput } = useSearchQueryContext() || [];
+const PexelsApi = ({ theme }) => {
   const [collection, setCollection] = useState([]);
-if(theme ==! []){theme = searchInput} 
+  const { searchInput } = useContext(SearchQueryContext)
   const fetchData = async () => {
+    console.log(theme)
     try {
       let data;
-      let curated = false;
-      if (theme === undefined) {
+      if (!theme?.length && !searchInput?.length) {
         const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
         data = await client.photos.curated({ per_page: 200 }); 
-        curated = true;
       } else {
         const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
-        data = await client.photos.search({ query: searchInput, per_page: 40 });
+        data = await client.photos.search({ query: searchInput?.length ? searchInput : theme, per_page: 40 });
       }
 
       const photos = data?.photos || [];
 
-      if (curated) {
+      if (!theme?.length) {
         const selectedImages = getRandomImages(photos, 40);
         setCollection(selectedImages);
       } else {

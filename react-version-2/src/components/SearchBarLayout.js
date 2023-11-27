@@ -1,15 +1,16 @@
-import React, { useState} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField'; 
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useSearchQueryContext }  from './searchInputStateContext';
+import { SearchQueryContext}  from './searchInputStateContext';
+import PexelsApi from '@/pages/api/PexlesApi';
 // import handleSendSearch from './searchImagesReRender';
 // import SendIcon from '@mui/icons-material/Send';
 
 const SearchBar = () => {
-  const { searchInput, setSearchInput }  = useSearchQueryContext();
+  const { searchInput, setSearchInput }  = useContext(SearchQueryContext);
   const [ localSearchState, setLocalSearchState ] = useState([])
   const generalThemes = [
     'Nature',
@@ -65,8 +66,11 @@ const SearchBar = () => {
   };
 const handleSendSearch = () => {
 setSearchInput( [...localSearchState])
-setTimeout(()=>{console.log(localSearchState, searchInput)}, 1000)
+
 } 
+useEffect(()=> {
+setLocalSearchState(searchInput)
+},[searchInput])
   return (
     <>
     <Stack spacing={3} sx={{ width: 500 }}>

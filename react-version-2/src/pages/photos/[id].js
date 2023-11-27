@@ -61,7 +61,7 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import FetchPexelsApi from '../api/pexelsApiSetPages'; // Adjust the path accordingly
+// import PexelsApi from '../api/pexelsApiSetPages'; // Adjust the path accordingly
 
 const Photo = () => {
   const router = useRouter();
@@ -72,7 +72,7 @@ const Photo = () => {
     const fetchPhotoById = async () => {
       try {
         // Fetch the photos using the FetchPexelsApi function
-        const data = await FetchPexelsApi();
+        const data = await PexelsApi();
         const photoData = data.photos.find(photo => photo.id === parseInt(id));
 
         if (photoData) {

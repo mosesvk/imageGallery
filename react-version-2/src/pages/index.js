@@ -1,15 +1,16 @@
 import Navbar from "@/components/navbar";
 import PexelsApi from "@/pages/api/PexlesApi";
 import SearchBar from "@/components/SearchBarLayout.js";
-import { useSearchQueryContext } from "@/components/searchInputStateContext";
+import { SearchQueryContext } from "@/components/searchInputStateContext";
+import { useContext } from "react";
+import Layout from "@/components/layout";
 
 export default function Home() {
-  const { searchInput } = useSearchQueryContext;
+  const { searchInput } = useContext(SearchQueryContext);
+  
   return (
-    <main>
-      <Navbar />
-         <PexelsApi theme= { searchInput }/>
-        <SearchBar />
-    </main>
-  );
+    <Layout>
+         <PexelsApi theme= {searchInput }/>
+       </Layout>
+  )
 }
