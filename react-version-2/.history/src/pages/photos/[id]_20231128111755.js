@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useEffect, useState, useContext } from 'react';
 import { fetchData } from '../api/PexlesApi.jsx';
+import { SearchQueryContext } from '@/components/searchInputStateContext';
+
 
 const Photo = () => {
   const router = useRouter();

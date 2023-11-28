@@ -6,11 +6,11 @@ import { useContext } from "react";
 import Layout from "@/components/layout";
 
 export default function Home() {
-  const { searchInput, theme } = useContext(SearchQueryContext);
+  const { searchInput } = useContext(SearchQueryContext);
   
   return (
     <Layout>
-         <PexelsApi theme={theme}/>
+         <PexelsApi theme= {searchInput }/>
        </Layout>
   )
 }

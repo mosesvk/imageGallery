@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { createClient } from 'pexels';
 // Action types
 const SET_SEARCH_INPUT = 'SET_SEARCH_INPUT';

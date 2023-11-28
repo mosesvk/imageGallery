@@ -12,7 +12,7 @@ const searchQueryReducer = (state, action) => {
     case SET_COLLECTION:
       return { ...state, collection: action.payload };
     case SET_THEME:
-    //   console.log('action', action.payload);
+      console.log('action', action.payload);
       return { ...state, theme: action.payload };
     default:
       return state;

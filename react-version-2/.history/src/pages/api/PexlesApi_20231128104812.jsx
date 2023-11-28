@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useReducer, useState } from 'react';
 import { createClient } from 'pexels';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SearchQueryContext } from '@/components/searchInputStateContext';
 //import { useReducer } from 'react';
 export const fetchData = async (searchInput, theme) => {
-  console.log(searchInput, theme);
   try {
     let data;
     if (!theme?.length && !searchInput?.length) {
@@ -26,9 +25,12 @@ const getRandomImages = (arr, n) => {
   const shuffled = arr.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, n);
 };
-const PexelsApi = ({ theme }) => {
+// PexelsApi.jsx
+// PexelsApi.jsx
+const PexelsApi = () => {
   const [collection, setCollection] = useState([]);
-  const { searchInput, setTheme: setContextTheme } = useContext(SearchQueryContext);
+  const { searchInput, setCollection: setContextCollection, setTheme: setContextTheme, theme } = useContext(SearchQueryContext);
+
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {
@@ -39,22 +41,25 @@ const PexelsApi = ({ theme }) => {
         } else {
           setCollection(photos);
         }
-        setContextTheme(theme)
-        
+        setContextCollection(photos);
+        setContextTheme(theme);
+        console.log('theme', theme); // Uncomment this line
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchDataAndSetCollection();
-  }, [searchInput, theme]);
+  }, [searchInput, setContextTheme, setContextCollection]);
   
-  console.log(theme);
+
+  // Log the theme outside of useEffect to capture the updated value
+  // console.log('theme', theme);
 
   return (
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
-          <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
+          <Link href="/photos/[id]" as={`/photos/${photo.id}`} passHref>
             <Image
               src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}
               alt={photo.photographer}
@@ -69,4 +74,6 @@ const PexelsApi = ({ theme }) => {
     </div>
   );
 };
+
 export default PexelsApi;
+

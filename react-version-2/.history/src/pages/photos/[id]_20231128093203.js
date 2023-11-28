@@ -2,23 +2,22 @@
 
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchData } from '../api/PexlesApi.jsx';
+
+import PexelsApi from '../api/PexlesApi.jsx'; // Adjust the path accordingly
+//import { fetchData } from '../api/PexlesApi.jsx';
 
 const Photo = () => {
   const router = useRouter();
-  const { id, theme } = router.query;
+  const { id } = router.query;
   const [photo, setPhoto] = useState(null);
-
-  console.log('theme', theme);
 
   useEffect(() => {
     const fetchPhotoById = async () => {
       try {
-
-        const data = await fetchData(undefined, theme);
-        console.log(data);
-        const photoData = data.find((photo) => photo.id === parseInt(id));
+        const data = await fetchData(undefined, undefined);
+        const photoData = data.photos.find((photo) => photo.id === parseInt(id));
   
         if (photoData) {
           setPhoto(photoData);
@@ -47,7 +46,5 @@ const Photo = () => {
     </div>
   );
 };
-
-
 
 export default Photo;

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { SearchQueryContext } from '@/components/searchInputStateContext';
 //import { useReducer } from 'react';
 export const fetchData = async (searchInput, theme) => {
-  console.log(searchInput, theme);
   try {
     let data;
     if (!theme?.length && !searchInput?.length) {
@@ -26,9 +25,10 @@ const getRandomImages = (arr, n) => {
   const shuffled = arr.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, n);
 };
-const PexelsApi = ({ theme }) => {
+const PexelsApi = () => {
   const [collection, setCollection] = useState([]);
-  const { searchInput, setTheme: setContextTheme } = useContext(SearchQueryContext);
+  const { searchInput, theme, setTheme: setContextTheme } = useContext(SearchQueryContext);
+
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {
@@ -39,34 +39,25 @@ const PexelsApi = ({ theme }) => {
         } else {
           setCollection(photos);
         }
-        setContextTheme(theme)
-        
+        setContextTheme(theme);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchDataAndSetCollection();
-  }, [searchInput, theme]);
-  
-  console.log(theme);
+  }, [searchInput, theme, setContextTheme]);
 
   return (
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
           <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
-            <Image
-              src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}
-              alt={photo.photographer}
-              width={photo.width}
-              height={photo.height}
-              className="max-w-full h-auto"
-              priority
-            />
+            {/* Rest of your code */}
           </Link>
         </div>
       ))}
     </div>
   );
 };
+
 export default PexelsApi;

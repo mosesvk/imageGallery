@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { SearchQueryContext } from '@/components/searchInputStateContext';
 //import { useReducer } from 'react';
 export const fetchData = async (searchInput, theme) => {
-  console.log(searchInput, theme);
   try {
     let data;
     if (!theme?.length && !searchInput?.length) {

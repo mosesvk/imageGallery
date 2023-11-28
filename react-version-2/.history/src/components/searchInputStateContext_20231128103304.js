@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { createClient } from 'pexels';
 // Action types
 const SET_SEARCH_INPUT = 'SET_SEARCH_INPUT';
@@ -6,14 +6,14 @@ const SET_COLLECTION = 'SET_COLLECTION';
 const SET_THEME = 'SET_THEME';
 // Reducer function
 const searchQueryReducer = (state, action) => {
+    console.log('action'action.payload);
   switch (action.type) {
     case SET_SEARCH_INPUT:
       return { ...state, searchInput: action.payload };
     case SET_COLLECTION:
       return { ...state, collection: action.payload };
     case SET_THEME:
-    //   console.log('action', action.payload);
-      return { ...state, theme: action.payload };
+        return { ...state, theme: action.payload };
     default:
       return state;
   }
@@ -37,25 +37,18 @@ export const SearchQueryContextProvider = ({ children }) => {
   };
   const setTheme = (value) => {
     dispatch({ type: SET_THEME, payload: value });
-  };
+  }
   // Fetch data and set collection on mount or when searchInput changes
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {
         let data;
         if (!state.searchInput?.length) {
-          const client = createClient(
-            'RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V'
-          );
+          const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
           data = await client.photos.curated({ per_page: 200 });
         } else {
-          const client = createClient(
-            'RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V'
-          );
-          data = await client.photos.search({
-            query: state.searchInput,
-            per_page: 40
-          });
+          const client = createClient('RmnyE1ueR0YTPYy3POfjzBavsu1z1gjUiKdA7N2D7KtRtkDStsSIfl5V');
+          data = await client.photos.search({ query: state.searchInput, per_page: 40 });
         }
         const photos = data?.photos || [];
         setCollection(photos);
@@ -66,10 +59,15 @@ export const SearchQueryContextProvider = ({ children }) => {
     fetchDataAndSetCollection();
   }, [state.searchInput]);
   return (
-    <SearchQueryContext.Provider
-      value={{ ...state, setSearchInput, setCollection, setTheme }}
-    >
+    <SearchQueryContext.Provider value={{ ...state, setSearchInput, setCollection, setTheme }}>
       {children}
     </SearchQueryContext.Provider>
   );
 };
+
+
+
+
+
+
+

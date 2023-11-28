@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { createClient } from 'pexels';
 // Action types
 const SET_SEARCH_INPUT = 'SET_SEARCH_INPUT';
@@ -12,7 +12,7 @@ const searchQueryReducer = (state, action) => {
     case SET_COLLECTION:
       return { ...state, collection: action.payload };
     case SET_THEME:
-    //   console.log('action', action.payload);
+      console.log('action', action.payload);
       return { ...state, theme: action.payload };
     default:
       return state;

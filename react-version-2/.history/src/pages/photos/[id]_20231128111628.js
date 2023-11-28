@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useEffect, useState, useContext } from 'react';
 import { fetchData } from '../api/PexlesApi.jsx';
+import { SearchQueryContext } from '@/components/searchInputStateContext';
+
 
 const Photo = () => {
   const router = useRouter();
   const { id, theme } = router.query;
   const [photo, setPhoto] = useState(null);
+  const context = useContext(SearchQueryContext);
 
   console.log('theme', theme);
 
