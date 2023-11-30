@@ -3,7 +3,7 @@ import { createClient } from 'pexels';
 // Action types
 const SET_SEARCH_INPUT = 'SET_SEARCH_INPUT';
 const SET_COLLECTION = 'SET_COLLECTION';
-const SET_THEMES = 'SET_THEMES';
+const SET_THEME = 'SET_THEME';
 // Reducer function
 const searchQueryReducer = (state, action) => {
   switch (action.type) {
@@ -11,9 +11,9 @@ const searchQueryReducer = (state, action) => {
       return { ...state, searchInput: action.payload };
     case SET_COLLECTION:
       return { ...state, collection: action.payload };
-    case SET_THEMES:
-      // console.log('action', action.payload);
-      return { ...state, themes: action.payload };
+    case SET_THEME:
+    //   console.log('action', action.payload);
+      return { ...state, theme: action.payload };
     default:
       return state;
   }
@@ -22,8 +22,7 @@ const searchQueryReducer = (state, action) => {
 const initialState = {
   searchInput: '',
   collection: [],
-  theme: 'home',
-  themes: []
+  theme: 'home'
 };
 // Create context
 export const SearchQueryContext = createContext();
@@ -36,8 +35,8 @@ export const SearchQueryContextProvider = ({ children }) => {
   const setCollection = (value) => {
     dispatch({ type: SET_COLLECTION, payload: value });
   };
-  const setThemes = (value) => {
-    dispatch({ type: SET_THEMES, payload: value });
+  const setTheme = (value) => {
+    dispatch({ type: SET_THEME, payload: value });
   };
   // Fetch data and set collection on mount or when searchInput changes
   useEffect(() => {
@@ -68,7 +67,7 @@ export const SearchQueryContextProvider = ({ children }) => {
   }, [state.searchInput]);
   return (
     <SearchQueryContext.Provider
-      value={{ ...state, setSearchInput, setCollection, setThemes }}
+      value={{ ...state, setSearchInput, setCollection, setTheme }}
     >
       {children}
     </SearchQueryContext.Provider>

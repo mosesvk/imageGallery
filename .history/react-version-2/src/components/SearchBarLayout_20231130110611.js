@@ -67,13 +67,12 @@ const SearchBar = () => {
   const handleSearchInputChange = (event, newValue) => {
     setLocalSearchState(newValue);
   };
-  console.log('localSearchState', localSearchState);
   const handleSendSearch = async () => {
     setThemes(localSearchState);
     // Pass themes to fetchData
-    await fetchData(undefined, localSearchState);
-    // console.log('data', data)
-    // setCollection(data);
+    const data = await fetchData(undefined, localSearchState);
+    // Update collection based on fetched data
+    setCollection(data);
   };
 
   useEffect(() => {

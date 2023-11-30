@@ -66,12 +66,12 @@ const SearchBar = () => {
   ];
   const handleSearchInputChange = (event, newValue) => {
     setLocalSearchState(newValue);
+    console.log('localSearchState', localSearchState);
   };
-  console.log('localSearchState', localSearchState);
   const handleSendSearch = async () => {
     setThemes(localSearchState);
     // Pass themes to fetchData
-    await fetchData(undefined, localSearchState);
+    fetchData(undefined, localSearchState);
     // console.log('data', data)
     // setCollection(data);
   };

@@ -12,7 +12,7 @@ const searchQueryReducer = (state, action) => {
     case SET_COLLECTION:
       return { ...state, collection: action.payload };
     case SET_THEMES:
-      // console.log('action', action.payload);
+      console.log('action', action.payload);
       return { ...state, themes: action.payload };
     default:
       return state;
@@ -22,7 +22,6 @@ const searchQueryReducer = (state, action) => {
 const initialState = {
   searchInput: '',
   collection: [],
-  theme: 'home',
   themes: []
 };
 // Create context

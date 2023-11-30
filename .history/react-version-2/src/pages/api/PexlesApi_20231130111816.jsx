@@ -34,35 +34,31 @@ const getRandomImages = (arr, n) => {
   const shuffled = arr.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, n);
 };
-const PexelsApi = ({
-  theme: contextTheme,
-  themes: contextThemes,
-  setTheme: setContextTheme,
-  setThemes: setContextThemes,
-  searchInput
-}) => {
+const PexelsApi = ({ theme, themes }) => {
   const [collection, setCollection] = useState([]);
-
-  console.log(contextTheme, contextThemes);
+  const {
+    searchInput,
+    setTheme: setContextTheme,
+    setThemes: setContextThemes, 
+    themes: contextThemes
+  } = useContext(SearchQueryContext);
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {
-        const photos = await fetchData(searchInput, contextTheme);
-        if (!contextTheme?.length) {
+        const photos = await fetchData(searchInput, theme);
+        if (!theme?.length) {
           const selectedImages = getRandomImages(photos, 40);
           setCollection(selectedImages);
         } else {
           setCollection(photos);
         }
-        setContextTheme(contextTheme);
+        setContextTheme(theme);
       } catch (error) {
         // console.error('Error fetching data:', error);
       }
-
     };
-    console.log('ran useEffect in PexelsApi');
     fetchDataAndSetCollection();
-  }, [searchInput, contextTheme, contextThemes, setContextThemes]);
+  }, [searchInput, theme, themes]);
 
   // console.log(collection);
 
@@ -70,7 +66,7 @@ const PexelsApi = ({
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
-          <Link href={`/photos/${photo.id}?theme=${contextTheme}`} passHref>
+          <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
             <Image
               src={`${
                 photo.src.large || photo.src.original

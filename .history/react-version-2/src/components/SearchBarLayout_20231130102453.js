@@ -5,16 +5,13 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { SearchQueryContext } from './searchInputStateContext';
-import { fetchData } from '@/pages/api/PexlesApi';
 // import { convertLength } from '@mui/material/styles/cssUtils';
 // import handleSendSearch from './searchImagesReRender';
 // import SendIcon from '@mui/icons-material/Send';
 const SearchBar = () => {
-  const { searchInput, setSearchInput, setThemes, themes } =
-    useContext(SearchQueryContext);
-  const [localSearchState, setLocalSearchState] = useState([]);
-  // console.log('localSearchState', localSearchState);
-  // console.log('contextThemes', themes);
+  const { searchInput, setSearchInput, theme } = useContext(SearchQueryContext);
+  const [ localSearchState, setLocalSearchState ] = useState([])
+  console.log("contextTheme", theme);
   const generalThemes = [
     'Nature',
     'Technology',
@@ -62,34 +59,26 @@ const SearchBar = () => {
     'Winter',
     'Summer',
     'Autumn',
-    'Spring'
+    'Spring',
   ];
   const handleSearchInputChange = (event, newValue) => {
     setLocalSearchState(newValue);
   };
-  console.log('localSearchState', localSearchState);
-  const handleSendSearch = async () => {
-    setThemes(localSearchState);
-    // Pass themes to fetchData
-    await fetchData(undefined, localSearchState);
-    // console.log('data', data)
-    // setCollection(data);
-  };
-
+  const handleSendSearch = () => {
+    setSearchInput()
+  console.log('contextTheme', theme);
+  }
   useEffect(() => {
-    setLocalSearchState(searchInput);
-  }, [searchInput]);
+    setLocalSearchState(searchInput)
+  }, [searchInput])
   return (
     <div className='flex justify-center items-center w-full h-full fixed top-0 left-0 z-0 invisible'>
       <div className=' flex justify-center items-center w-100 bg-gradient-to-r from-blue-500 to-transparent z-0 visible'>
         <Stack spacing={3} sx={{ width: 500 }}>
-          <Button variant='contained' onClick={handleSendSearch}>
-            {' '}
-            Send
-          </Button>
+          <Button variant="contained" onClick={handleSendSearch}> Send</Button>
           <Autocomplete
             multiple
-            id='tags-filled'
+            id="tags-filled"
             options={generalThemes}
             value={localSearchState || []}
             freeSolo
@@ -97,20 +86,16 @@ const SearchBar = () => {
             renderTags={(value, getTagProps) =>
               Array.isArray(value)
                 ? value.map((option, index) => (
-                    <Chip
-                      variant='outlined'
-                      label={option}
-                      {...getTagProps({ index })}
-                    />
-                  ))
+                  <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                ))
                 : null
             }
             renderInput={(params) => (
               <TextField
                 {...params}
-                variant='filled'
-                label='Image Search'
-                placeholder='...'
+                variant="filled"
+                label="Image Search"
+                placeholder="..."
               />
             )}
           />

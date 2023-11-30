@@ -43,7 +43,6 @@ const PexelsApi = ({
 }) => {
   const [collection, setCollection] = useState([]);
 
-  console.log(contextTheme, contextThemes);
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {

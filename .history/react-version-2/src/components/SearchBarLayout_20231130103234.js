@@ -5,7 +5,6 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { SearchQueryContext } from './searchInputStateContext';
-import { fetchData } from '@/pages/api/PexlesApi';
 // import { convertLength } from '@mui/material/styles/cssUtils';
 // import handleSendSearch from './searchImagesReRender';
 // import SendIcon from '@mui/icons-material/Send';
@@ -13,8 +12,8 @@ const SearchBar = () => {
   const { searchInput, setSearchInput, setThemes, themes } =
     useContext(SearchQueryContext);
   const [localSearchState, setLocalSearchState] = useState([]);
-  // console.log('localSearchState', localSearchState);
-  // console.log('contextThemes', themes);
+  console.log('localSearchState', localSearchState);
+  console.log('contextThemes', themes);
   const generalThemes = [
     'Nature',
     'Technology',
@@ -67,13 +66,9 @@ const SearchBar = () => {
   const handleSearchInputChange = (event, newValue) => {
     setLocalSearchState(newValue);
   };
-  console.log('localSearchState', localSearchState);
-  const handleSendSearch = async () => {
-    setThemes(localSearchState);
-    // Pass themes to fetchData
-    await fetchData(undefined, localSearchState);
-    // console.log('data', data)
-    // setCollection(data);
+  const handleSendSearch = () => {
+    // setSearchInput()
+    setThemes(localSearchState)
   };
 
   useEffect(() => {

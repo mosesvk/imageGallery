@@ -71,7 +71,7 @@ const SearchBar = () => {
   const handleSendSearch = async () => {
     setThemes(localSearchState);
     // Pass themes to fetchData
-    await fetchData(undefined, localSearchState);
+    fetchData(undefined, localSearchState);
     // console.log('data', data)
     // setCollection(data);
   };

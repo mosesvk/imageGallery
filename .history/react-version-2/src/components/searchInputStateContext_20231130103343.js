@@ -22,7 +22,6 @@ const searchQueryReducer = (state, action) => {
 const initialState = {
   searchInput: '',
   collection: [],
-  theme: 'home',
   themes: []
 };
 // Create context

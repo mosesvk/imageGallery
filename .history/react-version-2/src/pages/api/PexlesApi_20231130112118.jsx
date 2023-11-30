@@ -43,7 +43,6 @@ const PexelsApi = ({
 }) => {
   const [collection, setCollection] = useState([]);
 
-  console.log(contextTheme, contextThemes);
   useEffect(() => {
     const fetchDataAndSetCollection = async () => {
       try {
@@ -58,11 +57,9 @@ const PexelsApi = ({
       } catch (error) {
         // console.error('Error fetching data:', error);
       }
-
     };
-    console.log('ran useEffect in PexelsApi');
     fetchDataAndSetCollection();
-  }, [searchInput, contextTheme, contextThemes, setContextThemes]);
+  }, [searchInput, contextTheme, setContextThemes]);
 
   // console.log(collection);
 
@@ -70,7 +67,7 @@ const PexelsApi = ({
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
-          <Link href={`/photos/${photo.id}?theme=${contextTheme}`} passHref>
+          <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
             <Image
               src={`${
                 photo.src.large || photo.src.original
