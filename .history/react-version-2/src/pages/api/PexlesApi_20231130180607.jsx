@@ -3,6 +3,7 @@ import { createClient } from 'pexels';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SearchQueryContext } from '@/components/searchInputStateContext';
+import SearchBar from '@/components/SearchBarLayout';
 //import { useReducer } from 'react';
 export const fetchData = async (searchInput, themes) => {
   console.log('searchInput', searchInput, 'themes', themes);
@@ -58,7 +59,6 @@ const PexelsApi = ({
       } catch (error) {
         // console.error('Error fetching data:', error);
       }
-
     };
     console.log('ran useEffect in PexelsApi');
     fetchDataAndSetCollection();
@@ -67,24 +67,32 @@ const PexelsApi = ({
   // console.log(collection);
 
   return (
-    <div className='columns-6'>
-      {collection.map((photo) => (
-        <div key={photo.id} className='mb-4'>
-          <Link href={`/photos/${photo.id}?theme=${contextTheme}`} passHref>
-            <Image
-              src={`${
-                photo.src.large || photo.src.original
-              }?auto=format&fit=crop`}
-              alt={photo.photographer}
-              width={photo.width}
-              height={photo.height}
-              className='max-w-full h-auto'
-              priority
-            />
-          </Link>
-        </div>
-      ))}
-    </div>
+    <>
+      <SearchBar
+        searchInput={searchInput}
+        contextTheme={contextTheme}
+        contextThemes={contextThemes}
+        setContextThemes={setContextThemes}
+      />
+      <div className='columns-6'>
+        {collection.map((photo) => (
+          <div key={photo.id} className='mb-4'>
+            <Link href={`/photos/${photo.id}?theme=${contextTheme}`} passHref>
+              <Image
+                src={`${
+                  photo.src.large || photo.src.original
+                }?auto=format&fit=crop`}
+                alt={photo.photographer}
+                width={photo.width}
+                height={photo.height}
+                className='max-w-full h-auto'
+                priority
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 export default PexelsApi;
