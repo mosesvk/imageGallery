@@ -27,19 +27,11 @@ const Main = React.memo(() => {
     }
   }, []); // Empty dependency array to fetch data only on mount
 
-  // console.log(collection);
-
   return (
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
-          <Link
-            href={{
-              pathname: `/photos/${photo.id}`,
-              query: { collection: JSON.stringify(collection) },
-            }}
-            passHref
-          >
+          <Link href={{ pathname: `/photos/${photo.id}`, query: { collection } }} passHref>
             <Image
               src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}
               alt={photo.photographer}

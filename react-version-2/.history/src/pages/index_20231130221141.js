@@ -11,17 +11,15 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className='container'>
-        <SearchBar />
-        <Navbar />
-        <Main
-          theme={theme}
-          themes={themes}
-          setThemes={setThemes}
-          searchInput={searchInput}
-          setTheme={setTheme}
-        />
-      </div>
+      <SearchBar />
+      <Navbar />
+      <Main
+        theme={theme}
+        themes={themes}
+        setThemes={setThemes}
+        searchInput={searchInput}
+        setTheme={setTheme}
+      />
     </Layout>
   );
 }

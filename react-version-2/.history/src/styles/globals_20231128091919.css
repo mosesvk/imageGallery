@@ -31,9 +31,3 @@ body {
 .active-link {
   font-size: 2em;
 }
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}

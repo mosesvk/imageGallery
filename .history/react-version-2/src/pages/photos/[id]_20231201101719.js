@@ -8,12 +8,12 @@ const Photo = () => {
   // Get the photo ID from the route
   const { id, collection } = router.query;
 
-  // Check if collection is available and convert id to a number
-  const updatedCollection = collection ? JSON.parse(collection) : [];
-  const photoId = id ? parseInt(id, 10) : null;
+
+  console.log(collection);
 
   // Find the selected photo from the collection
-  const photo = updatedCollection.find((item) => item.id === photoId);
+  const photo = collection.find((item) => item.id === id);
+
 
   return (
     <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

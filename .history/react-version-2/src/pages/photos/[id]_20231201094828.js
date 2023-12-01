@@ -1,19 +1,26 @@
+// [id].js
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useContext, useEffect } from 'react';
+import { SearchQueryContext } from '@/context/mainContext';
 
 const Photo = () => {
   const router = useRouter();
+  const { collection } = useContext(SearchQueryContext);
 
   // Get the photo ID from the route
-  const { id, collection } = router.query;
-
-  // Check if collection is available and convert id to a number
-  const updatedCollection = collection ? JSON.parse(collection) : [];
-  const photoId = id ? parseInt(id, 10) : null;
+  const { id } = router.query;
 
   // Find the selected photo from the collection
-  const photo = updatedCollection.find((item) => item.id === photoId);
+  const photo = collection.find((item) => item.id === id);
+
+  useEffect(() => {
+    // If the photo is not in the collection, you might want to handle it (e.g., redirect to the main page)
+    if (!photo) {
+      // Handle the case where the photo is not found
+      router.push('/');
+    }
+  }, [photo, router]);
 
   return (
     <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

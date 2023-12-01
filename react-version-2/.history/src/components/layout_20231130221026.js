@@ -7,7 +7,8 @@ import SearchBar from './SearchBar';
 const Layout = ({ children }) => {
   return (
     <SearchQueryContextProvider>
-
+      <Navbar />
+      <SearchBar />
       <main>{children}</main>
     </SearchQueryContextProvider>
   );

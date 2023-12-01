@@ -4,18 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SearchQueryContext } from '@/context/mainContext';
 
-const Main = React.memo(() => {
+const Main = () => {
   const {
     collection,
     theme,
     setTheme,
     themes,
-    setSearchInput,
-    fetchDataAndSetCollection,
+    setSearchInput
   } = useContext(SearchQueryContext);
 
   useEffect(() => {
-    // Fetch data only on the initial mount
+    // Check if collection is empty, then fetch data
     if (collection.length === 0) {
       // Set a random theme
       const randomTheme = themes[Math.floor(Math.random() * themes.length)];
@@ -23,23 +22,16 @@ const Main = React.memo(() => {
 
       // Fetch data with an empty search input to get a random set
       setSearchInput('');
-      fetchDataAndSetCollection();
     }
-  }, []); // Empty dependency array to fetch data only on mount
+  }, [collection, themes, setTheme, setSearchInput]);
 
-  // console.log(collection);
+
 
   return (
     <div className='columns-6'>
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
-          <Link
-            href={{
-              pathname: `/photos/${photo.id}`,
-              query: { collection: JSON.stringify(collection) },
-            }}
-            passHref
-          >
+          <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
             <Image
               src={`${photo.src.large || photo.src.original}?auto=format&fit=crop`}
               alt={photo.photographer}
@@ -53,9 +45,6 @@ const Main = React.memo(() => {
       ))}
     </div>
   );
-}, (prevProps, nextProps) => {
-  // Memoize the component to prevent unnecessary rerenders
-  return true;
-});
+};
 
 export default Main;
