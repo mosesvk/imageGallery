@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SearchQueryContext } from '@/context/mainContext';
+import SearchBar from '@/components/SearchBar';
 
 const Main = () => {
   const {
@@ -29,6 +30,7 @@ const Main = () => {
 
   return (
     <div className='columns-6'>
+      {/* <SearchBar /> */}
       {collection.map((photo) => (
         <div key={photo.id} className='mb-4'>
           <Link href={`/photos/${photo.id}?theme=${theme}`} passHref>
